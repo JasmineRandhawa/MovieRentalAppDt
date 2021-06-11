@@ -1,0 +1,75 @@
+﻿@model MovieRentalApp.ViewModels.MovieFormViewModel
+
+@{
+    if (@Model.Id == null || @Model.Id == 0)
+    {
+        ViewData["Title"] = "New Movie";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+    }
+    else
+    {
+        ViewData["Title"] = "Edit Movie";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div class="text-center">
+    @{
+        if (@Model.Id == null || @Model.Id == 0)
+        {
+            <h1 class="display-4">New Movie</h1>
+        }
+        else
+        {
+            <h1 class="display-4">Edit Movie</h1>
+        }
+    }
+    @using (Html.BeginForm("Save", "Movie"))
+    {
+        @Html.ValidationSummary("There are some errors!", new { @class = "text-danger validation-summ valsummary" });
+        <br />
+
+        <div class="form-group" style="width: 400px; text-align: start">
+            @Html.LabelFor(c => c.Name)
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.Name)
+        </div>
+        <br />
+        <div class="form-group" style="width: 400px; text-align: start">
+            @Html.LabelFor(c => c.GenreId)
+            @Html.DropDownListFor(c => c.GenreId, new SelectList(@Model.Genres, "Id", "Name"), "Select Genre", new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.GenreId)
+        </div>
+        <br />
+        <div class="form-group" style="width: 400px; text-align: start">
+            @Html.LabelFor(c => c.NumberOfStock)
+            @Html.TextBoxFor(c => c.NumberOfStock, new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.NumberOfStock)
+        </div>
+        <br />
+        <div class="form-group" style="width: 400px; text-align: start">
+            @Html.LabelFor(c => c.ReleaseDate)
+            @Html.TextBoxFor(c => c.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.ReleaseDate)
+        </div>
+        <br />
+        <br />
+        @Html.HiddenFor(c => c.Id)
+        <div class="form-group" style="width: 60px; text-align: start">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+        @*this token is a secret code for user form as a  hidden field as RequestVerificationToken(Inspect/Resources/Cookies) and also stored in users computer as cookie in excrypted format.
+            this prevents malicious user to use external website to perform actions on the form (like edit ,save ) etc on users behalf.
+            If hidden token matches the cookie, request is legitimate , else its an attack and hacker maybe be able to steal
+            the cookie but cannot steal hidden token which is only initialized when user visits the form *@
+        @Html.AntiForgeryToken()
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+        }
+    }
+</div>
+

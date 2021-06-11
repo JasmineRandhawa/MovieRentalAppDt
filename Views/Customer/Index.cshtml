@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MovieRentalApp.Models.Customer>
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="text-center">
+    <h1 class="display-4">Customers</h1>
+    <div class="form-group" style="width: 180px; text-align: start">
+        @Html.ActionLink(" + New Customer", "New", "Customer", null, new { @class = "btn btn-primary" })
+    </div>
+    <br />
+    <table id="customer" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Birth Date</th>
+                <th>Membership Type</th>
+                <th>Discount Rate</th>
+                <th>Subscribed To NewsLetter?</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+@section scripts
+{
+    <script src="~/js/custom/customer.js"></script>
+}

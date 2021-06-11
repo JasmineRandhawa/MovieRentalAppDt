@@ -1,0 +1,9 @@
+Install-Package Bootbox.JS -Version 5.5.2
+Install-Package automapper -Version 8.0.0
+Install-Package jquery.datatables 1.10.11
+Install-Package Microsoft.AspNetCore.Mvc.NewtonsoftJson -Version:3.1.16
+Install-Package Microsoft.EntityFrameworkCore.SqlServer 
+Install-Package Microsoft.EntityFrameworkCore.Design 
+Install-Package Microsoft.AspNet.WebApi.Core
+Install-Package Microsoft.EntityFrameworkCore.Tools
+Install-Package Microsoft.EntityFrameworkCore 
